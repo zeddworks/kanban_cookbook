@@ -24,9 +24,9 @@ redmine_path = "/srv/rails/#{redmine_url}"
 
 gem_package "aasm"
 
-redmine_kanban_path = "#{redmine_path}/current/vendor/plugins"
+redmine_plugin_path = "#{redmine_path}/current/vendor/plugins"
 
-git "#{redmine_kanban_path}/redmine_kanban" do
+git "#{redmine_plugin_path}/redmine_kanban" do
   repository "git://github.com/edavis10/redmine_kanban.git"
   reference "v0.2.0"
   user 'nginx'
