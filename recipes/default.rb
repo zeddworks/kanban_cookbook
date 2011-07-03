@@ -17,6 +17,11 @@
 # limitations under the License.
 #
 
+redmine = Chef::EncryptedDataBagItem.load("apps", "redmine")
+
+redmine_url = redmine["redmine_url"]
+redmine_path = "/srv/rails/#{redmine_url}"
+
 gem_package "aasm"
 
 redmine_kanban_path = "#{redmine_path}/current/vendor/plugins"
