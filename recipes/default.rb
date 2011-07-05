@@ -17,16 +17,16 @@
 # limitations under the License.
 #
 
-redmine = Chef::EncryptedDataBagItem.load("apps", "redmine")
+chiliproject = Chef::EncryptedDataBagItem.load("apps", "chiliproject")
 
-redmine_url = redmine["redmine_url"]
-redmine_path = "/srv/rails/#{redmine_url}"
+chiliproject_url = chiliproject["chiliproject_url"]
+chiliproject_path = "/srv/rails/#{chiliproject_url}"
 
 gem_package "aasm"
 
-redmine_plugin_path = "#{redmine_path}/current/vendor/plugins"
+chiliproject_plugin_path = "#{chiliproject_path}/current/vendor/plugins"
 
-git "#{redmine_plugin_path}/redmine_kanban" do
+git "#{chiliproject_plugin_path}/redmine_kanban" do
   repository "git://github.com/edavis10/redmine_kanban.git"
   reference "v0.2.0"
   user 'nginx'
@@ -37,7 +37,7 @@ end
 execute "migrate_plugins" do
   user 'nginx'
   group 'nginx'
-  command "rake db:migrate_plugins"
-  cwd redmine_kanban_path
+  command "bundle exec rake db:migrate_plugins"
+  cwd chiliproject_plugin_path
   environment 'RAILS_ENV' => "production"
 end
